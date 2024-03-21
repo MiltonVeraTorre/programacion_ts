@@ -1,35 +1,43 @@
 // Variables
 
-const nom:string = 'Juan';
+const nom:string | number | boolean | undefined | null | never | unknown | any | string[] = 'Juan';
 let ed:number = 30;
+
 
 
 // Arrays
 
-let numeros = [1,2,3,4,5]
+const numeros = [1,2,3,4,5]
 let desconocido:number[] = []
+
+const strings: (string | number)[] = []
+
 
 // Agregar datos
 desconocido.push(1)
+strings.push("Hola")
+strings.push(2)
 
 // Quitar datos
 const dato = desconocido.pop()
 
 // Filter - Filtrar datos de un arreglo permitiendo solo los que cumplan con la condición
-
+// (parametros) => valor return implicito
+// (parametros) => { return valor} explicito
 const pares = numeros.filter((value:number)=> value % 2 === 0)
 const paresFunc = numeros.filter((value)=>{
     if(value % 2 === 0){
         return true
     }
-
     return false
 })
 
+
 // Map - Modificar los datos de un arreglo
 // No modifica el arreglo original, crea uno nuevo
-
-const dobles = numeros.map((num,_i)=> num * 2)
+// [1,2,3,4,5]
+// [3,4,9,8,15]
+const dobles = numeros.map((num)=> num * 2)
 const dobleFunc = numeros.map((num)=>{
     if (num%2 === 0){
         return num *2
@@ -38,10 +46,11 @@ const dobleFunc = numeros.map((num)=>{
     return num*3
 })
 
+console.log(dobleFunc)
 // ForEach - Itera sobre un arreglo
 // No modifica el original ni crea uno nuevo
 
-numeros.forEach((val,i,arr)=>{
+numeros.forEach((val)=>{
     console.log(val)
 })
 
@@ -57,26 +66,40 @@ interface PapaInt{
     esposa?: Esposa
 }
 
+
 interface UsuarioInt{
     nombre:string
     apellido:string
     hobbies: string[]
     papa: PapaInt
 }
+interface UsuarioDosInt{
+    nombred:{
+        primero:string
+        segundo:string
+    }
+    apellidod:string
+    hobbiesd: string[]
+    papad: PapaInt
+}
+
 
 
 const usuario:UsuarioInt = {
-    nombre:"Pedro",
-    apellido:"Hernandez",
-    hobbies: ["Patinar"],
-    papa:{
-        nombre: "Jesus",
-        esposa:{
-            nombre:"Maria"
-        }
-    }
-   
+   nombre:"Pedro",
+   apellido:"Hernandez",
+   hobbies:[],
+   papa:{
+    nombre:"Papa"
+   }
 }
+
+console.log(((usuario as unknown) as UsuarioDosInt).nombred?.primero )
+
+
+
+console.log(usuario)
+
 
 console.log(usuario.papa.esposa?.nombre ?? "Teresa")
 
@@ -104,14 +127,17 @@ console.log(suma(3,4))
 interface MultiplicarProps{
     a:number
     b: number
+    d?: number
+    compuesto: {
+        valor1:number,
+        valor2?: number
+    }
 }
 
-function multiplicar({a,b}:MultiplicarProps,c:number){
-    return a*b + c
+function multiplicar({a,b,d,compuesto}:MultiplicarProps,c:number){
+    return (a*b + c +(d?? 0)) / compuesto.valor1 + (compuesto.valor2 ?? 1)
 }
 
-
-console.log(multiplicar({a:3,b:4},5))
 
 const saludar = (nomb:string)=>{
     console.log(`Hola ${nomb}`)
@@ -131,24 +157,35 @@ const isaac = {
     edad: 20,
     hobbies: ["Leer","Correr"]
 }
-
-const {hobbies,...isaacHermano} = isaac
-
-
-const isaacHermanoCompleto = {
-    ...isaacHermano,
-    hobbies: ["Saltar"]
+const isa = {
+    nombre:"Isa",
+    apellido:"Lopez",
+    altura:180
 }
-console.log(isaacHermanoCompleto)
+
+const {hobbies,...hermanoIsaac} = isaac
+
+console.log(hobbies)
+console.log(isaac)
+console.log(hermanoIsaac)
+
+const hermanoIsaacCompleto = {
+    ...isa,
+    hermanoIsaac,
+    nombre:"Jesus"
+}
+
+console.log("HErmanoIsa",hermanoIsaacCompleto)
 
 const animales = ["Perro","Gato","Conejo"]
 
 function getAnimales(){
     return ["Perro","Gato","Conejo"]
 }
+const animal3 = animales[2]
 
-const [animal1,animal2] = getAnimales()
-console.log(animal2)
+const [pos1,pos2,pos3,pos4] = getAnimales()
+console.log("Pos4",pos4)
 
 const verdadero = false
 
@@ -165,17 +202,35 @@ console.log(asistencia)
 // true && false && true
 
 // Valores truthy
-// Variable o funcion definida y no 0
-
+// Variable o funcion definida y no 0 ni string vacio
+const numeroo = 2
+const arr = [1]
+const string22 = "e"
+const obj = {}
 // Valores falsey
 // Valores nulos
 // VAlores indefinidos
 // Valores 0
+// String vacio 
 
-
-const truthy = "" || 0 || true || false
-
-if(truthy){
-    console.log("HOla")
+interface FastInt{
+    falsey:any
+    pedro?:any
 }
+
+const truthy:FastInt = {
+    falsey:{
+        pedro:{
+            nombre:"Jesus"
+        }
+    }
+}
+
+
+if(truthy.pedro){
+
+    console.log("Hola")
+}
+
+
 

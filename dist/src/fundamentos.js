@@ -1,9 +1,12 @@
 "use strict";
 const nom = 'Juan';
 let ed = 30;
-let numeros = [1, 2, 3, 4, 5];
+const numeros = [1, 2, 3, 4, 5];
 let desconocido = [];
+const strings = [];
 desconocido.push(1);
+strings.push("Hola");
+strings.push(2);
 const dato = desconocido.pop();
 const pares = numeros.filter((value) => value % 2 === 0);
 const paresFunc = numeros.filter((value) => {
@@ -12,27 +15,27 @@ const paresFunc = numeros.filter((value) => {
     }
     return false;
 });
-const dobles = numeros.map((num, _i) => num * 2);
+const dobles = numeros.map((num) => num * 2);
 const dobleFunc = numeros.map((num) => {
     if (num % 2 === 0) {
         return num * 2;
     }
     return num * 3;
 });
-numeros.forEach((val, i, arr) => {
+console.log(dobleFunc);
+numeros.forEach((val) => {
     console.log(val);
 });
 const usuario = {
     nombre: "Pedro",
     apellido: "Hernandez",
-    hobbies: ["Patinar"],
+    hobbies: [],
     papa: {
-        nombre: "Jesus",
-        esposa: {
-            nombre: "Maria"
-        }
+        nombre: "Papa"
     }
 };
+console.log(usuario.nombred?.primero);
+console.log(usuario);
 console.log(usuario.papa.esposa?.nombre ?? "Teresa");
 console.log(Object.keys(usuario));
 console.log(Object.values(usuario));
@@ -44,10 +47,9 @@ function suma(a, b) {
     return a + b;
 }
 console.log(suma(3, 4));
-function multiplicar({ a, b }, c) {
-    return a * b + c;
+function multiplicar({ a, b, d, compuesto }, c) {
+    return (a * b + c + (d ?? 0)) / compuesto.valor1 + (compuesto.valor2 ?? 1);
 }
-console.log(multiplicar({ a: 3, b: 4 }, 5));
 const saludar = (nomb) => {
     console.log(`Hola ${nomb}`);
 };
@@ -60,25 +62,45 @@ const isaac = {
     edad: 20,
     hobbies: ["Leer", "Correr"]
 };
-const { hobbies, ...isaacHermano } = isaac;
-const isaacHermanoCompleto = {
-    ...isaacHermano,
-    hobbies: ["Saltar"]
+const isa = {
+    nombre: "Isa",
+    apellido: "Lopez",
+    altura: 180
 };
-console.log(isaacHermanoCompleto);
+const { hobbies, ...hermanoIsaac } = isaac;
+console.log(hobbies);
+console.log(isaac);
+console.log(hermanoIsaac);
+const hermanoIsaacCompleto = {
+    ...isa,
+    hermanoIsaac,
+    nombre: "Jesus"
+};
+console.log("HErmanoIsa", hermanoIsaacCompleto);
 const animales = ["Perro", "Gato", "Conejo"];
 function getAnimales() {
     return ["Perro", "Gato", "Conejo"];
 }
-const [animal1, animal2] = getAnimales();
-console.log(animal2);
+const animal3 = animales[2];
+const [pos1, pos2, pos3, pos4] = getAnimales();
+console.log("Pos4", pos4);
 const verdadero = false;
 const asistencia = {
     id: 0,
     alumno: "Juan"
 };
 console.log(asistencia);
-const truthy = "" || 0 || true || false;
-if (truthy) {
-    console.log("HOla");
+const numeroo = 2;
+const arr = [1];
+const string22 = "e";
+const obj = {};
+const truthy = {
+    falsey: {
+        pedro: {
+            nombre: "Jesus"
+        }
+    }
+};
+if (truthy.pedro) {
+    console.log("Hola");
 }
